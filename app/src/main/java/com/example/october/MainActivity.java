@@ -3,19 +3,26 @@ package com.example.october;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.sax.TextElementListener;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity   {
 
    // EditText operand2 = findViewById(R.id.oprand2);
    EditText operand1;
    EditText operand2;
    TextView resultET;
+   String operation;
    static String op1,op2,result;
 
     @Override
@@ -26,6 +33,51 @@ public class MainActivity extends AppCompatActivity {
         operand1 = findViewById(R.id.oprand1);
         operand2 = findViewById(R.id.oprand2);
         resultET = findViewById(R.id.result2);
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        /*"""
+        operand2.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+
+
+
+        });
+        operand1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }});
+            """*/
     }
 
     @Override
@@ -85,34 +137,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void plus(View view){
-        if (checkvalues() == true) {
-            Integer temp = Integer.parseInt(op1) + Integer.parseInt(op2);
-            result = temp.toString();
-        }
+        operation = "+";
+        operand2.requestFocus();
     }
     public void minus(View view){
-        if (checkvalues() == true) {
-            Integer temp = Integer.parseInt(op1) - Integer.parseInt(op2);
-            result = temp.toString();
-        }
+        operation = "-";
+        operand2.requestFocus();
     }
     public void mul(View view){
-        if (checkvalues()) {
-            Integer temp = Integer.parseInt(op1) * Integer.parseInt(op2);
-            result = temp.toString();
-        }
+        operation = "*";
+        operand2.requestFocus();
     }
     public void div(View view){
-        if (checkvalues() == true) {
-            if (op2.equals("0")) {
-                Toast.makeText(getApplicationContext(), "You can't divide by zero", Toast.LENGTH_SHORT).show();
-            } else {
-                Integer temp = Integer.parseInt(op1) / Integer.parseInt(op2);
-                result = temp.toString();
-            }
-        }
+        operation = "/";
+        operand2.requestFocus();
+
     }
     public void equal(View view) {
+        if(!checkvalues())return;
+        Integer temp =0;
+
+        if(operation.equals("+"))
+        {
+            temp = Integer.parseInt(op1)+Integer.parseInt(op2);
+        }
+        else if(operation.equals("-"))
+        {
+             temp = Integer.parseInt(op1)-Integer.parseInt(op2);
+        }
+        else if(operation.equals("/"))
+        {
+             temp = Integer.parseInt(op1)/Integer.parseInt(op2);
+        }
+        else if(operation.equals("*"))
+        {
+             temp = Integer.parseInt(op1)*Integer.parseInt(op2);
+        }
+        result = String.valueOf(temp);
         resultET.setText(result);
     }
     public boolean checkvalues(){
@@ -127,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+
+
 
 
 }

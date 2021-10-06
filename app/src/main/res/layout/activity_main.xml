@@ -80,7 +80,8 @@
                     android:minHeight="48dp"
                     android:numeric="integer"
                     android:textColor="#FFFFFF"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:imeOptions="actionDone"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -196,7 +197,8 @@
                     android:minHeight="48dp"
                     android:numeric="integer"
                     android:textColor="#FFFFFF"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:imeOptions="actionDone"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -73,7 +73,8 @@
                             android:numeric="integer"
                             android:textColor="#FFFFFF"
                             android:textSize="20sp"
-                            tools:ignore="SpeakableTextPresentCheck" />
+                            tools:ignore="SpeakableTextPresentCheck"
+                            android:imeOptions="actionDone"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -118,7 +119,8 @@
                             android:numeric="integer"
                             android:textColor="#FFFFFF"
                             android:textSize="20sp"
-                            tools:ignore="SpeakableTextPresentCheck" />
+                            tools:ignore="SpeakableTextPresentCheck"
+                            android:imeOptions="actionDone"/>
                     </LinearLayout>
                 </LinearLayout>
 
